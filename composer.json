@@ -1,0 +1,56 @@
+{
+    "name": "savinmikhail/symfony-translatable-exceptions",
+    "description": "Make sure there's no hardcoded exception messages, only translated ones",
+    "type": "psalm-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bruce Weirdan",
+            "email": "weirdan@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "ext-simplexml": "*",
+        "vimeo/psalm": "^5.16"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5.5",
+        "squizlabs/php_codesniffer": "^3.3",
+        "psalm/plugin-phpunit": "^0.16.0",
+        "weirdan/prophecy-shim": "^2.0",
+        "weirdan/codeception-psalm-module": "^0.13.1",
+        "codeception/codeception": "^4.1"
+    },
+    "extra": {
+        "psalm": {
+            "pluginClass": "SavinMikhail\\TranslatableExceptionsPlugin\\Plugin"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "SavinMikhail\\TranslatableExceptionsPlugin\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SavinMikhail\\TranslatableExceptionsPlugin\\Tests\\": [
+                "tests/_support",
+                "tests"
+            ]
+        }
+    },
+    "scripts": {
+        "check": [
+            "@analyze",
+            "@cs-check",
+            "@unit-tests",
+            "@acceptance-tests"
+        ],
+        "analyze": "codecept build && psalm",
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "unit-tests": "phpunit --colors=always",
+        "acceptance-tests": "codecept build && codecept --ansi run acceptance"
+    }
+}
